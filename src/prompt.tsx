@@ -102,24 +102,22 @@ export function PromptTitle({
   size,
   ...props
 }: React.ComponentProps<"h3"> & VariantProps<typeof promptTitleVariants>) {
-  const computedClassName = size 
+  const computedClassName = size
     ? twMerge(clsx(promptTitleVariants({ size, className })))
-    : twMerge(clsx(
-        "font-medium text-gray-900",
-        "[div[data-size='xs']_&]:text-sm",
-        "[div[data-size='sm']_&]:text-base", 
-        "[div[data-size='default']_&]:text-base",
-        "[div[data-size='md']_&]:text-lg",
-        "[div[data-size='lg']_&]:text-xl",
-        className
-      ));
+    : twMerge(
+        clsx(
+          "font-medium text-gray-900",
+          "[div[data-size='xs']_&]:text-sm",
+          "[div[data-size='sm']_&]:text-base",
+          "[div[data-size='default']_&]:text-base",
+          "[div[data-size='md']_&]:text-lg",
+          "[div[data-size='lg']_&]:text-xl",
+          className,
+        ),
+      );
 
   return (
-    <h3
-      data-slot="prompt-title"
-      className={computedClassName}
-      {...props}
-    />
+    <h3 data-slot="prompt-title" className={computedClassName} {...props} />
   );
 }
 
@@ -130,15 +128,17 @@ export function PromptDescription({
 }: React.ComponentProps<"p"> & VariantProps<typeof promptDescriptionVariants>) {
   const computedClassName = size
     ? twMerge(clsx(promptDescriptionVariants({ size, className })))
-    : twMerge(clsx(
-        "text-gray-600",
-        "[div[data-size='xs']_&]:text-xs",
-        "[div[data-size='sm']_&]:text-sm",
-        "[div[data-size='default']_&]:text-sm", 
-        "[div[data-size='md']_&]:text-base",
-        "[div[data-size='lg']_&]:text-base",
-        className
-      ));
+    : twMerge(
+        clsx(
+          "text-gray-600",
+          "[div[data-size='xs']_&]:text-xs",
+          "[div[data-size='sm']_&]:text-sm",
+          "[div[data-size='default']_&]:text-sm",
+          "[div[data-size='md']_&]:text-base",
+          "[div[data-size='lg']_&]:text-base",
+          className,
+        ),
+      );
 
   return (
     <p
