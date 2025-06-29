@@ -73,14 +73,14 @@ export function Chat() {
             }
           />
           {messages.length === 0 && (
-            <Prompts size="xs">
+            <Prompts>
               <Prompt>
                 <PromptTitle>Understanding the Transformer Model</PromptTitle>
                 <PromptDescription>
                   Give a detailed analysis of the Transformer model.
                 </PromptDescription>
               </Prompt>
-              <Prompt>
+              <Prompt size="xs">
                 <PromptTitle>Understanding the Attention Mechanism</PromptTitle>
                 <PromptDescription>
                   Explain the attention mechanism in neural networks.

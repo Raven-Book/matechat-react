@@ -3,14 +3,9 @@ import "./tailwind.css";
 import { cva, type VariantProps } from "class-variance-authority";
 import clsx from "clsx";
 import type * as React from "react";
-import { createContext, useContext } from "react";
 import { twMerge } from "tailwind-merge";
 
-const PromptContext = createContext<{
-  size?: "default" | "lg" | "md" | "sm" | "xs";
-}>({});
-
-const promptsVariants = cva("flex flex-wrap", {
+const promptsVariants = cva("flex", {
   variants: {
     size: {
       xs: "gap-2",
@@ -79,47 +74,50 @@ export function Prompts({
   ...props
 }: React.ComponentProps<"div"> & VariantProps<typeof promptsVariants>) {
   return (
-    <PromptContext.Provider value={{ size: size ?? "default" }}>
-      <div
-        data-slot="prompts"
-        className={twMerge(clsx(promptsVariants({ size }), className))}
-        {...props}
-      />
-    </PromptContext.Provider>
+    <div
+      data-slot="prompts"
+      className={twMerge(clsx(promptsVariants({ size }), className))}
+      {...props}
+    />
   );
 }
 
 export function Prompt({
   className,
-  size: sizeProp,
+  size = "default",
   ...props
 }: React.ComponentProps<"div"> & VariantProps<typeof promptVariants>) {
-  const { size: contextSize } = useContext(PromptContext);
-  const size = sizeProp ?? contextSize;
-
   return (
-    <PromptContext.Provider value={{ size }}>
-      <div
-        data-slot="prompt"
-        className={twMerge(clsx(promptVariants({ size, className })))}
-        {...props}
-      />
-    </PromptContext.Provider>
+    <div
+      data-slot="prompt"
+      data-size={size}
+      className={twMerge(clsx(promptVariants({ size, className })))}
+      {...props}
+    />
   );
 }
 
 export function PromptTitle({
   className,
-  size: sizeProp,
+  size,
   ...props
 }: React.ComponentProps<"h3"> & VariantProps<typeof promptTitleVariants>) {
-  const { size: contextSize } = useContext(PromptContext);
-  const size = sizeProp ?? contextSize;
+  const computedClassName = size 
+    ? twMerge(clsx(promptTitleVariants({ size, className })))
+    : twMerge(clsx(
+        "font-medium text-gray-900",
+        "[div[data-size='xs']_&]:text-sm",
+        "[div[data-size='sm']_&]:text-base", 
+        "[div[data-size='default']_&]:text-base",
+        "[div[data-size='md']_&]:text-lg",
+        "[div[data-size='lg']_&]:text-xl",
+        className
+      ));
 
   return (
     <h3
       data-slot="prompt-title"
-      className={twMerge(clsx(promptTitleVariants({ size, className })))}
+      className={computedClassName}
       {...props}
     />
   );
@@ -127,16 +125,25 @@ export function PromptTitle({
 
 export function PromptDescription({
   className,
-  size: sizeProp,
+  size,
   ...props
 }: React.ComponentProps<"p"> & VariantProps<typeof promptDescriptionVariants>) {
-  const { size: contextSize } = useContext(PromptContext);
-  const size = sizeProp ?? contextSize;
+  const computedClassName = size
+    ? twMerge(clsx(promptDescriptionVariants({ size, className })))
+    : twMerge(clsx(
+        "text-gray-600",
+        "[div[data-size='xs']_&]:text-xs",
+        "[div[data-size='sm']_&]:text-sm",
+        "[div[data-size='default']_&]:text-sm", 
+        "[div[data-size='md']_&]:text-base",
+        "[div[data-size='lg']_&]:text-base",
+        className
+      ));
 
   return (
     <p
       data-slot="prompt-description"
-      className={twMerge(clsx(promptDescriptionVariants({ size, className })))}
+      className={computedClassName}
       {...props}
     />
   );
