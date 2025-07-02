@@ -1,5 +1,11 @@
 # Changelog
 
+## \[0.1.0-alpha.6]
+
+### Bug Fixes
+
+- [`6358f1b`](https://github.com/DevCloudFE/matechat-react/commit/6358f1b2f285dba029d3be700401809c7d09a06c) adjust title/description font-size to match the prompt component
+
 ## \[0.1.0-alpha.5]
 
 ### New Features
