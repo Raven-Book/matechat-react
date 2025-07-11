@@ -1,7 +1,6 @@
 name: Bug Report
 description: Submit a bug report for a frontend UI library.
 title: "[Bug] Brief Title of the Issue"
-type: Bug
 body:
   - type: dropdown
     id: will-contribute

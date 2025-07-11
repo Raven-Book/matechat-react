@@ -1,7 +1,6 @@
 name: Feature Request
 description: Submit a feature request
 title: "[Feature] Brief Title of the Feature"
-type: Feature
 body:
   - type: dropdown
     id: will-contribute
